@@ -1,8 +1,23 @@
 {
-    "notes": [
+  "notes": [
     {
-        "title":"Learn to Code",
-        "text":"or die trying..."
+      "title": "Learn to Code",
+      "text": "or die trying..."
+    },
+    {
+      "title": "Bike around the lake",
+      "text": "in shorts",
+      "id": "1"
+    },
+    {
+      "title": "Make smoothie",
+      "text": "drink it down",
+      "id": "2"
+    },
+    {
+      "title": "Get Revenge",
+      "text": "served cold",
+      "id": "3"
     }
-    ]
+  ]
 }
