@@ -6,15 +6,16 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public'));
 
-const { notes } = require('./db/db');
+const notes = require('./db/db');
 
 function addNewNote(body, noteArray) {
     const note = body;
     noteArray.push(note);
     fs.writeFileSync(
         path.join(__dirname, './db/db.json'),
-        JSON.stringify({ notes: noteArray }, null, 2)
+        JSON.stringify(notes)
     );
     return note;
 }
@@ -26,12 +27,20 @@ app.get('/api/notes', (req, res) => {
 
 app.post('/api/notes', (req, res) => {
     // set id based on what the next index of the array will be
-    req.body.id = notes.length.toString();
+    req.body.id = Math.floor(Math.random() * 1000);
 
     // add note to json file and notes array in this function
     const note = addNewNote(req.body, notes);
 
     res.json(note);
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/notes.html'));
 });
 
 app.listen(PORT, () => {
